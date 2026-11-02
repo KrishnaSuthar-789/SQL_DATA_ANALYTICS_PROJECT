@@ -1,10 +1,17 @@
 /*
-Using advance sql techniques to further analyze the data 
+**************************************************************
+Using advance SQL techniques to further analyze the data 
+**************************************************************
 */
+
 USE DatawarehouseAnalytics;
 
+/*
+**************************************************************
 -- Change ove time analysis
 -- Tracking YoY revenue change/trend
+**************************************************************
+*/
 
 SELECT YEAR(order_date) AS order_year, 
 		SUM(sales) AS total_revenue,
@@ -15,7 +22,11 @@ WHERE order_date IS NOT NULL
 GROUP BY YEAR(order_date)
 ORDER BY order_year;
 
+/*
+**************************************************************
 -- Tracking MoM revenue change/ Monthly Trends
+**************************************************************
+*/
 
 SELECT MONTH(order_date) AS order_month, 
 		SUM(sales) AS total_revenue,
@@ -26,8 +37,12 @@ WHERE order_date IS NOT NULL
 GROUP BY MONTH(order_date)
 ORDER BY order_month;
 
+/*
+**************************************************************
 -- Cumulative Analysis
 -- total sales over year and running total of sales over time 
+**************************************************************
+*/
 
 SELECT order_year,
 	total_sales,
@@ -43,7 +58,12 @@ FROM(
 	) t
 ;
 
--- total sales over year and moving average of sales over time 
+/*
+****************************************************************
+-- total sales over year and moving average of sales over time
+****************************************************************
+*/
+
 SELECT order_year,
 	total_revenue,
 	avg_price,
@@ -57,11 +77,15 @@ FROM (
 	GROUP BY YEAR(order_date)
 )t;
 
---Performance analysis
-
-/* Analysing the yearly performance by comparing the 
-sales to previous year sales and Calculating 
-total_revenue vs previous_year_revenue, Difference and % difference */
+/*
+**************************************************************************
+Performance analysis
+**************************************************************************
+- Analysing the yearly performance by comparing the 
+  sales to previous year sales and Calculating 
+  total_revenue vs previous_year_revenue, Difference and % difference 
+**************************************************************************
+*/
 
 WITH YoY_sales AS (
 	SELECT YEAR(order_date) AS order_year, 
@@ -80,8 +104,12 @@ SELECT order_year,
 		((current_year_revenue - previous_year_revenue)/ previous_year_revenue)*100 AS '% diff'
 FROM YoY_sales;
 
-/* Analysing the yearly perfromance of products with its previous
-	year sales and overall average of the product */
+/* 
+**************************************************************************
+Analysing the yearly perfromance of products with 
+its previous year sales and overall average of the product 
+**************************************************************************
+*/
 
 WITH sales_summary AS (
 	SELECT YEAR(s.order_date) AS order_year,
@@ -104,7 +132,9 @@ FROM sales_summary
 ;
 
 /* 
-	Analysing the difference between total yearly sales and average
+**************************************************************************
+Analysing the difference between total yearly sales and average
+**************************************************************************
 */
 
 WITH sales_summary AS (
@@ -129,9 +159,11 @@ SELECT  order_year,
 		END AS avg_change
 FROM sales_summary ;
 
--- Part to whole Analysis 
 /*
- Analysing the category that contributed the most to total sales  
+******************************************************************
+Part to whole Analysis 
+******************************************************************
+- Analysing the category that contributed the most to total sales  
 */
 
 WITH sales_summary AS (
@@ -152,7 +184,12 @@ SELECT category,
 FROM sales_summary
 ORDER BY total_contro_percent DESC;
 
-/* Analysing the products that brings most customers and their contribution to total_customers */
+/* 
+************************************************************
+Analysing the products that brings most customers and 
+their contribution to total_customers 
+************************************************************
+*/
 
 WITH customer_summary AS (
 	SELECT  p.product_name,
@@ -172,9 +209,13 @@ SELECT  product_name,
 FROM customer_summary
 ORDER BY product_contribution_customers DESC;
 
--- Data Segmentation 
-/*  Segmenting products into cost range
-	Counting how many products fall into each range */
+/*
+************************************************************
+Data Segmentation
+************************************************************
+- Segmenting products into cost range
+  Counting how many products fall into each range 
+*/
 
 WITH product_cost_range AS (
 	SELECT product_name,
