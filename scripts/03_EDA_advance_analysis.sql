@@ -8,8 +8,8 @@ USE DatawarehouseAnalytics;
 
 /*
 **************************************************************
--- Change ove time analysis
--- Tracking YoY revenue change/trend
+- Change ove time analysis
+- Tracking YoY revenue change/trend
 **************************************************************
 */
 
@@ -24,7 +24,7 @@ ORDER BY order_year;
 
 /*
 **************************************************************
--- Tracking MoM revenue change/ Monthly Trends
+- Tracking MoM revenue change/ Monthly Trends
 **************************************************************
 */
 
@@ -39,8 +39,8 @@ ORDER BY order_month;
 
 /*
 **************************************************************
--- Cumulative Analysis
--- total sales over year and running total of sales over time 
+- Cumulative Analysis
+- total sales over year and running total of sales over time 
 **************************************************************
 */
 
@@ -60,7 +60,7 @@ FROM(
 
 /*
 ****************************************************************
--- total sales over year and moving average of sales over time
+- total sales over year and moving average of sales over time
 ****************************************************************
 */
 
