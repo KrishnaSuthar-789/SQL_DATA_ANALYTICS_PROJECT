@@ -1,5 +1,5 @@
 /*
-
+**************************************************************************************************
 --------------------------------------------------------------------------------------------
 Product Report 
 --------------------------------------------------------------------------------------------
@@ -20,15 +20,19 @@ Script includes:
 		Months since last sold, 
 		Average order revenue (AOR), 
 		Average monthly revenue.
-
 --------------------------------------------------------------------------------------------
-	
+**************************************************************************************************
 */
 
 USE DatawarehouseAnalytics;
 GO
 
--- Retrive core columns from tables 
+/*
+**********************************************
+Retrive core columns from tables 
+**********************************************
+*/
+
 CREATE OR ALTER VIEW product_report AS 
 	WITH product_basic_info AS (
 		SELECT 
@@ -45,8 +49,11 @@ CREATE OR ALTER VIEW product_report AS
 		FROM fact_sales f
 		LEFT JOIN dim_products p 
 		ON f.product_key = p.product_key),
-
-	-- aggregating product key metrics
+/*
+**********************************************
+Aggregating product key metrics
+**********************************************
+*/
 	product_agg AS (
 		SELECT 
 			product_name,
