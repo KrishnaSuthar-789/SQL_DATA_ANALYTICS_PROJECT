@@ -1,5 +1,5 @@
 /*
-
+*******************************************************************************
 ---------------------------------------------------------------------------
 Customer report 
 ---------------------------------------------------------------------------
@@ -19,13 +19,17 @@ Script includes:
 		Average order value, 
 		Average monthly spend.
 ---------------------------------------------------------------------------
-
+*******************************************************************************
 */
 
 USE DatawarehouseAnalytics;
 GO
 
--- Retrive core columns from tables 
+/*
+********************************************
+Retrive core columns from tables
+********************************************
+*/
 
 CREATE OR ALTER VIEW customer_report AS
 WITH cust_basic_details AS (
@@ -43,7 +47,13 @@ WITH cust_basic_details AS (
 	ON f.customer_key = c.customer_key
 	WHERE order_date IS NOT NULL
 ),
--- aggeregating customer key metrics
+
+/*
+********************************************
+Aggeregating customer key metrics
+********************************************
+*/
+
 customer_agg AS (
 	SELECT
 		customer_key,
