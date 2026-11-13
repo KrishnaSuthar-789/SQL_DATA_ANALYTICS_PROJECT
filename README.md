@@ -13,11 +13,11 @@ The goal was to turn raw business data into meaningful insights and reusable dat
 - **Microsoft SQL Server**
 - **T-SQL**
 - **SQL Server Management Studio (SSMS)**
-- Common Table Expressions (CTEs)
-- Subqueries and Joins
-- Aggregate Functions
-- Window Functions
-- SQL Views
+- **Common Table Expressions (CTEs)**
+- **Subqueries and Joins**
+- **Aggregate Functions**
+- **Window Functions**
+- **SQL Views**
 
 ## Analysis Performed
 
